@@ -2,8 +2,15 @@
 
 namespace habil\ResellerClub\APIs;
 
+use Exception;
 use habil\ResellerClub\Helper;
+use SimpleXMLElement;
 
+/**
+ * Class Customers
+ *
+ * @package habil\ResellerClub\APIs
+ */
 class Customers
 {
     use Helper;
@@ -15,19 +22,30 @@ class Customers
 
     /**
      * Changes the password for the specified Customer.
-     * @param $customerId
-     * @param $newPassword
-     * @return mixed|\SimpleXMLElement
+     *
+     * @param int    $customerId
+     * @param string $newPassword
+     *
+     * @return mixed|SimpleXMLElement
+     * @throws Exception
+     * @link https://manage.logicboxes.com/kb/node/806
      */
     public function changePassword($customerId, $newPassword)
     {
-        return $this->post('change-password', ['customer-id' => $customerId, 'new-passwd' => $newPassword]);
+        return $this->post(
+            'change-password',
+            ['customer-id' => $customerId, 'new-passwd' => $newPassword]
+        );
     }
 
     /**
      * Gets the Customer details for the specified Customer Username.
-     * @param $username
-     * @return mixed|\SimpleXMLElement
+     *
+     * @param string $username
+     *
+     * @return mixed|SimpleXMLElement
+     * @throws Exception
+     * @link https://manage.logicboxes.com/kb/node/874
      */
     public function details($username)
     {
@@ -36,8 +54,12 @@ class Customers
 
     /**
      * Gets the Customer details for the specified Customer Id.
-     * @param $customerId
-     * @return mixed|\SimpleXMLElement
+     *
+     * @param int $customerId
+     *
+     * @return mixed|SimpleXMLElement
+     * @throws Exception
+     * @link https://manage.logicboxes.com/kb/node/967
      */
     public function detailsById($customerId)
     {
@@ -46,19 +68,24 @@ class Customers
 
     /**
      * Modifies the Account details of the specified Customer.
-     * @param $customerId
-     * @param $username
-     * @param $name
-     * @param $company
-     * @param $address
-     * @param $city
-     * @param $state
-     * @param $country
-     * @param $zipCode
-     * @param $phoneCC
-     * @param $phone
-     * @param $lang
-     * @return mixed|\SimpleXMLElement
+     *
+     * @param int    $customerId
+     * @param string $username
+     * @param string $name
+     * @param string $company
+     * @param string $address
+     * @param string $city
+     * @param string $state
+     * @param string $country
+     * @param string $zipCode
+     * @param string $phoneCC
+     * @param string $phone
+     * @param string $lang
+     *
+     * @return mixed|SimpleXMLElement
+     * @throws Exception
+     * @link https://manage.logicboxes.com/kb/node/805
+     * @todo Check documents there is some updates in this method parameters
      */
     public function modify(
         $customerId,
@@ -73,8 +100,7 @@ class Customers
         $phoneCC,
         $phone,
         $lang
-    )
-    {
+    ) {
         return $this->post(
             'modify',
             [
@@ -96,19 +122,24 @@ class Customers
 
     /**
      * Creates a Customer Account using the details provided.
-     * @param $username
-     * @param $passwd
-     * @param $name
-     * @param $company
-     * @param $address
-     * @param $city
-     * @param $state
-     * @param $country
-     * @param $zipCode
-     * @param $phoneCC
-     * @param $phone
-     * @param $lang
-     * @return mixed|\SimpleXMLElement
+     *
+     * @param string $username
+     * @param string $passwd
+     * @param string $name
+     * @param string $company
+     * @param string $address
+     * @param string $city
+     * @param string $state
+     * @param string $country
+     * @param string $zipCode
+     * @param string $phoneCC
+     * @param string $phone
+     * @param string $lang
+     *
+     * @return mixed|SimpleXMLElement
+     * @throws Exception
+     * @link https://manage.logicboxes.com/kb/node/804
+     * @todo Check documents there is some updates in this method parameters
      */
     public function signup(
         $username,
@@ -123,8 +154,7 @@ class Customers
         $phoneCC,
         $phone,
         $lang
-    )
-    {
+    ) {
         return $this->post(
             'signup',
             [
@@ -146,8 +176,11 @@ class Customers
 
     /**
      * Generates a temporary password for the specified Customer. The generated password is valid only for 3 days.
-     * @param $customerId
-     * @return mixed|\SimpleXMLElement
+     *
+     * @param int $customerId
+     *
+     * @return mixed|SimpleXMLElement
+     * @throws Exception
      */
     public function tempPassword($customerId)
     {

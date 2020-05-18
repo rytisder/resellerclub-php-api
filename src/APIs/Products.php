@@ -2,8 +2,16 @@
 
 namespace habil\ResellerClub\APIs;
 
+use Exception;
 use habil\ResellerClub\Helper;
+use SimpleXMLElement;
 
+/**
+ * Class Products
+ *
+ * @package habil\ResellerClub\APIs
+ * @todo    Add other endpoints
+ */
 class Products
 {
     use Helper;
@@ -12,7 +20,11 @@ class Products
 
     /**
      * Get customer prices
-     * @return mixed|\SimpleXMLElement
+     *
+     * @return mixed|SimpleXMLElement
+     * @throws Exception
+     * @link https://manage.logicboxes.com/kb/node/864
+     * @todo Add optional parameters
      */
     public function customerPrice()
     {
